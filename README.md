@@ -1,7 +1,14 @@
 # Intro to Neural Networks - WORKSHOP
 
 # If you don't have Python:
+### For OSx users:
 * ```$ brew install python 2.7```
+
+### For Interns
+* ```$ sudo add-apt-repository ppa:fkrull/deadsnakes```
+* ```$ sudo apt-get update```
+* ```$ sudo apt-get install python2.7```
+
 
 # If you don't have pip:
 
