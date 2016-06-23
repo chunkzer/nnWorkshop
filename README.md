@@ -1,5 +1,7 @@
 # Intro to Neural Networks - WORKSHOP
 
+[Slides] (https://slides.com/chunkzer/deck)
+
 # If you don't have Python:
 ### For OSx users:
 * ```$ brew install python 2.7```
