@@ -42,11 +42,8 @@ def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
 
-def softMax(x):
+def softmax(x):
     return np.exp(x) / np.sum(np.exp(x))
-
-def derivSoftMax(x):
-    return x
 
 # derivada de la funcion sigmoid
 def derivSigmoid(x):
@@ -57,7 +54,7 @@ def derivSigmoid(x):
 images, labels = load_mnist("training", path='data/mnist/')
 
 # parameters
-batch_size = 25
+batch_size = 100
 np.random.seed(1)
 perceptronsHidden = 100
 epochs = 200
@@ -83,9 +80,12 @@ for batch in xrange(len(images) / batch_size):
     l1 = sigmoid(np.dot(l0, Wxh))
     l2 = sigmoid(np.dot(l1, Why))
 
-    output_error = np.array(Y) - l2
+    normalized_l2 = np.array([softmax(layer2) for layer2 in l2])
+
+    # todo: apply a better error understaing, like cross-entropy
+    output_error = Y - normalized_l2
     # gradient descent
-    l2_delta = output_error * derivSigmoid(l2)
+    l2_delta = output_error * derivSigmoid(normalized_l2)
     hidden_error = l2_delta.dot(Why.T)
     l1_delta = hidden_error * derivSigmoid(l1)
 
