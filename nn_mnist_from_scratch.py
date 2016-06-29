@@ -42,7 +42,7 @@ def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
 
-def softmax(x):
+def softmax(x, index):
     return np.exp(x) / np.sum(np.exp(x))
 
 # derivada de la funcion sigmoid
@@ -54,16 +54,17 @@ def derivSigmoid(x):
 images, labels = load_mnist("training", path='data/mnist/')
 
 # parameters
-batch_size = 100
+batch_size = 10
 np.random.seed(1)
 perceptronsHidden = 100
-epochs = 200
-
+epochs = 2000
+learning_rate = 0.02
 
 # initialization
 
 Wxh = 2 * np.random.random((784, perceptronsHidden)) - 1
-Why = 2 * np.random.random((perceptronsHidden, 10)) - 1
+Whs = 2 * np.random.random((perceptronsHidden, 10)) - 1
+Wsy = 2 * np.random.random((10, 10))
 
 # create batches for training
 for batch in xrange(len(images) / batch_size):
@@ -78,20 +79,28 @@ for batch in xrange(len(images) / batch_size):
     # layers:
     l0 = np.array(X)
     l1 = sigmoid(np.dot(l0, Wxh))
-    l2 = sigmoid(np.dot(l1, Why))
+    l2 = sigmoid(np.dot(l1, Whs))
+
+    lsoft = softmax(np.dot(l2, Wsy), )
 
     normalized_l2 = np.array([softmax(layer2) for layer2 in l2])
-
+    # print "Softmax output size: " + `normalized_l2.shape`
     # todo: apply a better error understaing, like cross-entropy
     output_error = Y - normalized_l2
+
+    #Cross Entropy:
+    #C = -1/batch_size * (Y * np.log(normalized_l2) + (1 - Y) * np.log(1 - normalized_l2))
+    C = (- np.array(Y) * np.log(normalized_l2)).mean()
+    # print "Cross Entropy: " + `C`
+    # stop = raw_input()
     # gradient descent
-    l2_delta = output_error * derivSigmoid(normalized_l2)
-    hidden_error = l2_delta.dot(Why.T)
+    l2_delta =  C * derivSigmoid(normalized_l2)
+    hidden_error = l2_delta.dot(Whs.T)
     l1_delta = hidden_error * derivSigmoid(l1)
 
     # weight adjustment
-    Why += l1.T.dot(l2_delta)
-    Wxh += l0.T.dot(l1_delta)
+    Whs += learning_rate * l1.T.dot(l2_delta)
+    Wxh += learning_rate * l0.T.dot(l1_delta)
 
     print "error: " + str(np.mean(np.abs(output_error)))
 
