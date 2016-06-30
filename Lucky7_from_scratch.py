@@ -38,20 +38,23 @@ def load_mnist(dataset='training', path='.', digits=np.arange(10)):
 
 # create batches for training
 def training(images, labels, Wxh, Why, batch_size, learning_rate):
-    for batch in xrange(len(images) / batch_size):
+    # todo iterar correctamente
+    for batch in xrange(0):
         X = []
         Y = []
+        #creamos los batches
         for i in range(batch * batch_size, (batch + 1) * batch_size):
-            # input:  Shape(batch_size, 784)
-            X.append(images[i].flatten())
-            # expected output: Shape(batch_size, 10)
-            Y.append([1] if (labels[i][0]) == 7 else [0])
+            # todo llenar esto
+            X.append()
+            # todo llenar esto tambien
+            Y.append()
 
-            # layers:
-        l0 = np.array(X)
-        l1 = sigmoid(np.dot(l0, Wxh))
-        l2 = sigmoid(np.dot(l1, Why))
+        # todo llenar las layers
+        l0 = 0
+        l1 = 0
+        l2 = 0
 
+        #todo lo demas se queda igual, es la misma logica
         cost = np.array(Y) - l2
 
         # gradient descent
@@ -78,9 +81,7 @@ def validate(imagesT, labelsT, Wxh, Why, batch_size):
         X = []
         Y = []
         for i in range(batch * batch_size, (batch + 1) * batch_size):
-            # input:  Shape(batch_size, 784)
             X.append(imagesT[i].flatten())
-            # expected output: Shape(batch_size, 10)
             Y.append([1] if (labelsT[i][0]) == 7 else [0])
 
         l0 = np.array(X)
@@ -119,17 +120,19 @@ def derivSigmoid(x):
 images, labels = load_mnist("training", path='data/mnist/')
 imagesT, labelsT = load_mnist("testing", path='data/mnist/')
 
-# Parametros
-batch_size = 20
+# Parametros y Modelo
 np.random.seed(1)
-hidden_cells = 10
-learning_rate = 0.05
 
-# Inicializacion de nuestros pesos
+#todo llenar esto
+batch_size = 0
+hidden_cells = 0
+learning_rate = 0
+
+#todo llenar esto
 Wxh = 2 * np.random.random((784, hidden_cells)) - 1
 Why = 2 * np.random.random((hidden_cells, 1)) - 1
 
-# Execute program
+# Entrenamineto
 
 validate(imagesT, labelsT, Wxh, Why, batch_size)
 Wxh, Why = training(images, labels, Wxh, Why, batch_size, learning_rate)
