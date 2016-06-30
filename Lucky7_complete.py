@@ -126,11 +126,8 @@ Wxh = 2 * np.random.random((784, hidden_cells)) - 1
 Why = 2 * np.random.random((hidden_cells, 1)) - 1
 
 #Execute program
-
-print "Why:" + `Why`
 validate(imagesT, labelsT, Wxh, Why, batch_size)
 training(images, labels, Wxh, Why, batch_size, learning_rate)
-print "Why:" + `Why`
 validate(imagesT, labelsT, Wxh, Why, batch_size)
 
 #####
