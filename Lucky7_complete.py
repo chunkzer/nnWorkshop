@@ -1,9 +1,8 @@
 ## Este primer bloque solo carga los datos que necesitamos para el entrenamiento.
 import numpy as np
 import os, struct, array
-import matplotlib.pyplot as plt
 import collections
-from IPython.display import Image
+
 
 def load_mnist(dataset='training', path='.', digits=np.arange(10)):
     if dataset == "training":
@@ -36,6 +35,7 @@ def load_mnist(dataset='training', path='.', digits=np.arange(10)):
 
     return images, labels
 
+
 # create batches for training
 def training(images, labels, Wxh, Why, batch_size, learning_rate):
     for batch in xrange(len(images) / batch_size):
@@ -60,7 +60,7 @@ def training(images, labels, Wxh, Why, batch_size, learning_rate):
         l1_delta = hidden_error * derivSigmoid(l1)
 
         # if batch % 100 == 0:
-            # print "Error:" + str(np.mean(np.abs(cost)))
+        # print "Error:" + str(np.mean(np.abs(cost)))
 
         # weight adjustment
         Why += learning_rate * l1.T.dot(l2_delta)
@@ -68,8 +68,10 @@ def training(images, labels, Wxh, Why, batch_size, learning_rate):
 
     # add the testing dataset for validation and calculate error.
     print "Finished."
+    return Wxh, Why
 
-#Funcion de validacion
+
+# Funcion de validacion
 def validate(imagesT, labelsT, Wxh, Why, batch_size):
     total7 = totalNon7 = correct7 = falsePositive = 0
     for batch in xrange(len(imagesT) / batch_size):
@@ -103,15 +105,17 @@ def validate(imagesT, labelsT, Wxh, Why, batch_size):
     print "Total NonSevens: " + `totalNon7`
     print "Accuracy of our model: " + `100.0 * correct7 / total7`
 
+
 # Funciones de activacion / utileria
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
+
 
 def derivSigmoid(x):
     return x * (1 - x)
 
 ##########~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#Load Data
+# Load Data
 images, labels = load_mnist("training", path='data/mnist/')
 imagesT, labelsT = load_mnist("testing", path='data/mnist/')
 
@@ -125,12 +129,10 @@ learning_rate = 0.05
 Wxh = 2 * np.random.random((784, hidden_cells)) - 1
 Why = 2 * np.random.random((hidden_cells, 1)) - 1
 
-#Execute program
+# Execute program
 
-print "Why:" + `Why`
 validate(imagesT, labelsT, Wxh, Why, batch_size)
-training(images, labels, Wxh, Why, batch_size, learning_rate)
-print "Why:" + `Why`
+Wxh, Why = training(images, labels, Wxh, Why, batch_size, learning_rate)
 validate(imagesT, labelsT, Wxh, Why, batch_size)
 
 #####
