@@ -44,17 +44,17 @@ def training(images, labels, Wxh, Why, batch_size, learning_rate):
         Y = []
         #creamos los batches
         for i in range(batch * batch_size, (batch + 1) * batch_size):
-            # todo llenar esto
+            # TODO llenar esto
             X.append()
             # todo llenar esto tambien
             Y.append()
 
-        # todo llenar las layers
+        # TODO llenar los layers
         l0 = 0
         l1 = 0
         l2 = 0
 
-        #todo lo demas se queda igual, es la misma logica
+        #Lo demas se queda igual, es la misma logica
         cost = np.array(Y) - l2
 
         # gradient descent
@@ -62,8 +62,8 @@ def training(images, labels, Wxh, Why, batch_size, learning_rate):
         hidden_error = l2_delta.dot(Why.T)
         l1_delta = hidden_error * derivSigmoid(l1)
 
-        # if batch % 100 == 0:
-        # print "Error:" + str(np.mean(np.abs(cost)))
+        if batch % 100 == 0:
+        print "Error:" + str(np.mean(np.abs(cost)))
 
         # weight adjustment
         Why += learning_rate * l1.T.dot(l2_delta)
@@ -129,8 +129,8 @@ hidden_cells = 0
 learning_rate = 0
 
 #todo llenar esto
-Wxh = 2 * np.random.random((784, hidden_cells)) - 1
-Why = 2 * np.random.random((hidden_cells, 1)) - 1
+Wxh = 2 * np.random.random(()) - 1
+Why = 2 * np.random.random(()) - 1
 
 # Entrenamineto
 
