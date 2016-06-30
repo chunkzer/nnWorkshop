@@ -6,7 +6,7 @@
 ### For OSx users:
 * ```$ brew install python 2.7```
 
-### For Interns
+### For Linux
 * ```$ sudo add-apt-repository ppa:fkrull/deadsnakes```
 * ```$ sudo apt-get update```
 * ```$ sudo apt-get install python2.7```
@@ -44,6 +44,15 @@ $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/tensorflow-
 
 -- Most pragmatic explanation of backpropagation and gradient descent I've seen.
 
+* http://neuralnetworksanddeeplearning.com/
+
+-- Michael Nielsens ongoing "book." Very detailed in its steps.
+
+### For Convolutional Neural Networks
+
+* http://colah.github.io/posts/2014-07-Understanding-Convolutions/
+
+
 ### For Reccurrent Neural Networks:
 
 * http://colah.github.io/posts/2015-08-Understanding-LSTMs/ 
@@ -61,19 +70,4 @@ $ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/tensorflow-
 * https://openai.com/blog/generative-models/
 
 -- Overview of the cutting edge on generative models. Their current state and possible future.
-
-## For Tensorflow: 
-
-* https://www.tensorflow.org/versions/r0.9/tutorials/index.html
-
--- Googles tutorials and documentation. They are excellent.
-
-* https://github.com/sjchoi86/Tensorflow-101
-
--- Implementations of various ML algorithms using TF. Very friendly.
-
-* http://www.gitlogs.com/most_popular?topic=tensorflow
-
--- Tensorflow is an extremely active library. Keep an eye out for interesting contributions done on TF or related to it.
-
 
